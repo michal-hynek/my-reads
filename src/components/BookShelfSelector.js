@@ -11,12 +11,12 @@ function BookShelfSelector(props) {
 
     return (
         <div className="book-shelf-changer">
-            <select>
+            <select value={props.selectedShelf || "none"} onChange={selectShelf}>
                 <option value="move" disabled>Move to...</option>
-                <option value="currentlyReading" onClick={selectShelf}>Currently Reading</option>
-                <option value="wantToRead" onClick={selectShelf}>Want to Read</option>
-                <option value="read" onClick={selectShelf}>Read</option>
-                <option value="none" onClick={selectShelf}>None</option>
+                <option value="currentlyReading">Currently Reading</option>
+                <option value="wantToRead">Want to Read</option>
+                <option value="read">Read</option>
+                <option value="none">None</option>
             </select>
         </div>
     )
