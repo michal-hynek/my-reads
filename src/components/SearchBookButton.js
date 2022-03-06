@@ -1,11 +1,11 @@
-function onClick() {
-    console.log('navigate to search page')
-}
+import { Link } from 'react-router-dom';
 
 function SearchBookButton() {
     return (
         <div className="open-search">
-            <button onClick={onClick}>Add a book</button>
+            <Link to="/search">
+                <button>Add a book</button>
+            </Link>
         </div>
     )
 }

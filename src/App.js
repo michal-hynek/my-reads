@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import MyBooks from './components/MyBooks';
@@ -47,22 +48,24 @@ class App extends Component {
             }));
     }
 
-    /*render() {
-        return (
-            <div className="list-books">
-                <Header />
-                <MyBooks
-                    currentlyReading={this.state.currentlyReading}
-                    wantToRead={this.state.wantToRead}
-                    read={this.state.read}
-                    onBookMoved={(update) => this.updateBookHandler(update.book, update.shelf)} />
-                <SearchBookButton />
-            </div>
-        );
-    }*/
     render() {
         return (
-            <SearchPage onBookMoved={(update) => this.updateBookHandler(update.book, update.shelf)} />
+            <Routes>
+                <Route path="/" element={
+                    <div className="list-books">
+                        <Header />
+                        <MyBooks
+                            currentlyReading={this.state.currentlyReading}
+                            wantToRead={this.state.wantToRead}
+                            read={this.state.read}
+                            onBookMoved={(update) => this.updateBookHandler(update.book, update.shelf)} />
+                        <SearchBookButton />
+                    </div>
+                } />
+                <Route path="/search" element={
+                    <SearchPage onBookMoved={(update) => this.updateBookHandler(update.book, update.shelf)} />
+                } />
+            </Routes>
         )
     }
 }

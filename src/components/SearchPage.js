@@ -13,7 +13,6 @@ class SearchPage extends Component {
         if (query) {
             search(query).then((response) => {
                 const searchResult = response && !response.error ? response : [];
-                console.log(searchResult);
 
                 this.setState({
                     searchResult: searchResult.map(b => ({ ...b, shelf: 'none' })),

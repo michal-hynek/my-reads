@@ -6,14 +6,16 @@ function SearchResult(props) {
         <div className="search-books-results">
             <ol className="books-grid">
                 {props.books.map(book => (
-                    <Book
-                        id={book.id}
-                        title={book.title}
-                        authors={book.authors}
-                        shelf={props.name}
-                        cover={book.imageLinks.thumbnail}
-                    >
-                    </Book>
+                    <li key={book.id}>
+                        <Book
+                            id={book.id}
+                            title={book.title}
+                            authors={book.authors}
+                            shelf={props.name}
+                            cover={book.imageLinks.thumbnail}
+                        >
+                        </Book>
+                    </li>
                 ))}
             </ol>
         </div>
