@@ -4,6 +4,7 @@ import Header from './components/Header';
 import MyBooks from './components/MyBooks';
 import SearchBookButton from './components/SearchBookButton';
 import { getAll, update } from './api/BookAPI';
+import SearchPage from './components/SearchPage';
 
 class App extends Component {
     state = {
@@ -46,7 +47,7 @@ class App extends Component {
             }));
     }
 
-    render() {
+    /*render() {
         return (
             <div className="list-books">
                 <Header />
@@ -58,6 +59,11 @@ class App extends Component {
                 <SearchBookButton />
             </div>
         );
+    }*/
+    render() {
+        return (
+            <SearchPage onBookMoved={(update) => this.updateBookHandler(update.book, update.shelf)} />
+        )
     }
 }
 
