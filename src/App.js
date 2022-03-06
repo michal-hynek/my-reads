@@ -34,7 +34,7 @@ class App extends Component {
 
         update(book, shelf)
             .then((update) => this.setState((prevState) => {
-                const books = [...prevState.currentlyReading, ...prevState.wantToRead, ...prevState.read]
+                const books = [...prevState.currentlyReading, ...prevState.wantToRead, ...prevState.read, { ...book, shelf } ]
                 const bookMap = books.reduce((map, book) => {
                     map[book.id] = book;
                     return map;

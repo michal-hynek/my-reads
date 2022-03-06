@@ -13,10 +13,10 @@ function Book(props) {
     return (
         <div className="book">
             <div className="book-top">
-                <div className="book-cover" style={getBookCoverStyle(props.cover)}></div>
+                <div className="book-cover" style={getBookCoverStyle(props.book.imageLinks?.thumbnail)}></div>
                 <BookShelfSelector
-                    selectedShelf={props.shelf}
-                    onShelfUpdated={(shelf) => props.onBookMoved({ book: { id: props.id }, shelf })}
+                    selectedShelf={props.book.shelf || 'none'}
+                    onShelfUpdated={(shelf) => props.onBookMoved({ book: props.book, shelf})}
                 />
             </div>
             <div className="book-title">{props.title}</div>
@@ -26,11 +26,7 @@ function Book(props) {
 }
 
 Book.propTypes = {
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    authors: PropTypes.array.isRequired,
-    shelf: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
+    book: PropTypes.object.isRequired,
     onBookMoved: PropTypes.func.isRequired,
 };
 

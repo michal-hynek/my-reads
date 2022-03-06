@@ -15,7 +15,7 @@ class SearchPage extends Component {
                 const searchResult = response && !response.error ? response : [];
 
                 this.setState({
-                    searchResult: searchResult.map(b => ({ ...b, shelf: 'none' })),
+                    searchResult,
                 })
             });
         } else {

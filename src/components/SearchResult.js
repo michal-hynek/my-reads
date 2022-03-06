@@ -8,11 +8,8 @@ function SearchResult(props) {
                 {props.books.map(book => (
                     <li key={book.id}>
                         <Book
-                            id={book.id}
-                            title={book.title}
-                            authors={book.authors}
-                            shelf={props.name}
-                            cover={book.imageLinks.thumbnail}
+                            book={book}
+                            onBookMoved={props.onBookMoved}
                         >
                         </Book>
                     </li>
