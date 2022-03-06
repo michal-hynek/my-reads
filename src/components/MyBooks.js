@@ -7,24 +7,30 @@ function MyBooks(props) {
             <BookShelf
                 name="currentlyReading"
                 title="Currently Reading"
-                books={props.books.filter(b => b.shelf === "currentlyReading")}
+                books={props.currentlyReading}
+                onBookMoved={props.onBookMoved}
             />
             <BookShelf
                 name="wantToRead"
                 title="Want to Read"
-                books={props.books.filter(b => b.shelf === "wantToRead")}
+                books={props.wantToRead}
+                onBookMoved={props.onBookMoved}
             />
             <BookShelf
                 name="read"
                 title="Read"
-                books={props.books.filter(b => b.shelf == "read")}
+                books={props.read}
+                onBookMoved={props.onBookMoved}
             />
         </div>
     )
 }
 
 MyBooks.propTypes = {
-    books: PropTypes.array.isRequired
+    currentlyReading: PropTypes.array.isRequired,
+    wantToRead: PropTypes.array.isRequired,
+    read: PropTypes.array.isRequired,
+    onBookMoved: PropTypes.func.isRequired,
 };
 
 export default MyBooks;

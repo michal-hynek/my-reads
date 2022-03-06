@@ -14,7 +14,10 @@ function Book(props) {
         <div className="book">
             <div className="book-top">
                 <div className="book-cover" style={getBookCoverStyle(props.cover)}></div>
-                <BookShelfSelector />
+                <BookShelfSelector
+                    selectedShelf={props.shelf}
+                    onShelfUpdated={(shelf) => props.onBookMoved({ book: { id: props.id }, shelf })}
+                />
             </div>
             <div className="book-title">{props.title}</div>
             <div className="book-authors">{props.authors.join(", ")}</div>
@@ -28,6 +31,7 @@ Book.propTypes = {
     authors: PropTypes.array.isRequired,
     shelf: PropTypes.string.isRequired,
     cover: PropTypes.string.isRequired,
+    onBookMoved: PropTypes.func.isRequired,
 };
 
 export default Book;

@@ -1,17 +1,64 @@
+import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header';
 import MyBooks from './components/MyBooks';
 import SearchBookButton from './components/SearchBookButton';
-import books from "./api/StaticBookList.json";
+import { getAll, update } from './api/BookAPI';
 
-function App() {
-    return (
-        <div className="list-books">
-            <Header />
-            <MyBooks books={books} />
-            <SearchBookButton />
-        </div>
-    );
+class App extends Component {
+    state = {
+        currentlyReading: [],
+        wantToRead: [],
+        read: [],
+    };
+
+    componentDidMount() {
+        getAll().then((books) => this.setState({
+            currentlyReading: books.filter(b => b.shelf === "currentlyReading"),
+            wantToRead: books.filter(b => b.shelf === "wantToRead"),
+            read: books.filter(b => b.shelf === "read"),
+        }));
+    }
+
+    updateBookHandler(book, shelf) {
+        function updateBooks(shelf, bookIds, bookMap) {
+            return bookIds
+                .filter(id => bookMap[id])
+                .map(id => {
+                    bookMap[id].shelf = shelf;
+                    return bookMap[id];
+                });
+        }
+
+        update(book, shelf)
+            .then((update) => this.setState((prevState) => {
+                const books = [...prevState.currentlyReading, ...prevState.wantToRead, ...prevState.read]
+                const bookMap = books.reduce((map, book) => {
+                    map[book.id] = book;
+                    return map;
+                }, {});
+
+                return {
+                    currentlyReading: updateBooks("currentlyReading", update.currentlyReading, bookMap),
+                    wantToRead: updateBooks("wantToRead", update.wantToRead, bookMap),
+                    read: updateBooks("read", update.read, bookMap),
+                };
+            }));
+    }
+
+    render() {
+        return (
+            <div className="list-books">
+                <Header />
+                <MyBooks
+                    currentlyReading={this.state.currentlyReading}
+                    wantToRead={this.state.wantToRead}
+                    read={this.state.read}
+                    onBookMoved={(update) => this.updateBookHandler(update.book, update.shelf)} />
+                <SearchBookButton />
+            </div>
+        );
+    }
 }
 
 export default App;
