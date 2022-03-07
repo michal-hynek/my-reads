@@ -10,17 +10,18 @@ function getBookCoverStyle(bookCover) {
 }
 
 function Book(props) {
+    const { book } = props;
     return (
         <div className="book">
             <div className="book-top">
-                <div className="book-cover" style={getBookCoverStyle(props.book.imageLinks?.thumbnail)}></div>
+                <div className="book-cover" style={getBookCoverStyle(book.imageLinks?.thumbnail)}></div>
                 <BookShelfSelector
-                    selectedShelf={props.book.shelf || 'none'}
-                    onShelfUpdated={(shelf) => props.onBookMoved({ book: props.book, shelf})}
+                    selectedShelf={book.shelf || 'none'}
+                    onShelfUpdated={(shelf) => props.onBookMoved({ book, shelf})}
                 />
             </div>
-            <div className="book-title">{props.book.title}</div>
-            <div className="book-authors">{(props.book.authors || []).join(", ")}</div>
+            <div className="book-title">{book.title}</div>
+            <div className="book-authors">{(book.authors || []).join(", ")}</div>
         </div>
     )
 }
