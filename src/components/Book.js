@@ -19,8 +19,8 @@ function Book(props) {
                     onShelfUpdated={(shelf) => props.onBookMoved({ book: props.book, shelf})}
                 />
             </div>
-            <div className="book-title">{props.title}</div>
-            <div className="book-authors">{(props.authors || []).join(", ")}</div>
+            <div className="book-title">{props.book.title}</div>
+            <div className="book-authors">{(props.book.authors || []).join(", ")}</div>
         </div>
     )
 }
