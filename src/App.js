@@ -63,7 +63,9 @@ class App extends Component {
                     </div>
                 } />
                 <Route path="/search" element={
-                    <SearchPage onBookMoved={(update) => this.updateBookHandler(update.book, update.shelf)} />
+                    <SearchPage
+                        myBooks={[ ...this.state.currentlyReading, ...this.state.wantToRead, ...this.state.read ]}
+                        onBookMoved={(update) => this.updateBookHandler(update.book, update.shelf)} />
                 } />
             </Routes>
         )
